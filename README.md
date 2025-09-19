@@ -66,6 +66,32 @@ O dashboard inclui:
 - Expansão para indicadores de transporte e armazenagem avançada
 
 ---
+## 🚀 Como usar
+
+### 1. Clone este repositório:
+   ```bash
+   git clone https://github.com/DeboraKlein/Warehouse-KPI-Dashboard.git
+````
+### 2. Abra o arquivo .pbix no Power BI Desktop
+
+### 3. Navegue pelas páginas do dashboard para explorar os KPIs
+
+Os dados utilizados são simulados e estão disponíveis na pasta /data
+
+
+---
+
+
+📷 Exemplos de visualizações
+
+![Dashboard - Visão Geral](./images/dashboard-visao-geral.png)
+![Dashboard - Inventário e SLA](./images/dashboard-inventario-sla.png)
+
+🔗 Projetos relacionados
+
+- [Logistics Dashboard](https://github.com/DeboraKlein/Logistics-Dashboard): Análise de desempenho de frota e entregas
+
+
 
 ## 👩‍💻 Sobre mim
 
