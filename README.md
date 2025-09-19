@@ -82,7 +82,7 @@ Os dados utilizados são simulados e estão disponíveis na pasta /data
 ---
 
 
-📷 Exemplos de visualizações
+## 📷 Exemplos de visualizações
 
 ![Dashboard - Visão Geral](./images/dashboard-visao-geral.png)
 ![Dashboard - Inventário e SLA](./images/dashboard-inventario-sla.png)
