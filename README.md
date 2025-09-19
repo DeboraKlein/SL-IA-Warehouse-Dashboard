@@ -87,7 +87,7 @@ Os dados utilizados são simulados e estão disponíveis na pasta /data
 ![Dashboard - Visão Geral](./images/dashboard-visao-geral.png)
 ![Dashboard - Inventário e SLA](./images/dashboard-inventario-sla.png)
 
-🔗 Projetos relacionados
+## 🔗 Projetos relacionados
 
 - [Logistics Dashboard](https://github.com/DeboraKlein/Logistics-Dashboard): Análise de desempenho de frota e entregas
 
