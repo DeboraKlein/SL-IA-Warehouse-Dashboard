@@ -90,7 +90,7 @@ Os dados utilizados são simulados e estão disponíveis na pasta /data
 
 ## 📷 Exemplos de visualizações
 
-![Dashboard - Visão Geral](<https://github.com/user-attachments/assets/029dcdf7-fb70-4744-a408-f5692a86ccf5" />)
+![Dashboard - Visão Geral](https://github.com/user-attachments/assets/029dcdf7-fb70-4744-a408-f5692a86ccf5)
 ![Dashboard - Inventário e SLA](./images/dashboard-inventario-sla.png)
 
 ## 🔗 Projetos relacionados
