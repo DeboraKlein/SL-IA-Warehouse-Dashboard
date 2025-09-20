@@ -39,8 +39,9 @@ Os dados estão organizados em quatro arquivos principais:
 
 ## 📊 Indicadores calculados
 
-- **Produtividade** = Itens Processados ÷ Tempo Total  
-- **Taxa de erro (%)** = (Erros ÷ Itens Processados) × 100  
+- **Produtividade Média** = Itens Processados ÷ Tempo Total  
+- **Taxa de erro (%)** = (Erros ÷ Itens Processados) × 100
+- **Volume Total Processado** = Soma do Total de Itens Processados
 - **Acuracidade de inventário (%)** = (Qtd. Física ÷ Qtd. Sistema) × 100  
 - **Custo por item** = Custo Total ÷ Itens Processados  
 - **OTIF (%)** = % de pedidos entregues dentro do SLA
@@ -52,10 +53,9 @@ Os dados estão organizados em quatro arquivos principais:
 O dashboard inclui:
 
 - Gráficos de linha e barras por operação e armazém  
-- Cartões de KPIs com metas e variações  
+- Cartões de KPIs com indicadores  
 - Filtros dinâmicos por data, unidade, operação e SKU  
-- Tabelas detalhadas com drill-through por pedido e SKU
-
+  
 ---
 
 ## 🧩 Próximos passos
@@ -80,6 +80,11 @@ Os dados utilizados são simulados e estão disponíveis na pasta /data
 
 
 ---
+
+## 🔗 Link do Dashboard  
+### 🔗 Acesse o dashboard publicado aqui  
+[https://app.powerbi.com/view?r=eyJrIjoiNjA5NDRhYmMtMmZmNC00MmI5LTk1MGYtMWNiZWNlMTQ5NjZjIiwidCI6IjY1OWNlMmI4LTA3MTQtNDE5OC04YzM4LWRjOWI2MGFhYmI1NyJ9](https://app.powerbi.com/view?r=eyJrIjoiNjA5NDRhYmMtMmZmNC00MmI5LTk1MGYtMWNiZWNlMTQ5NjZjIiwidCI6IjY1OWNlMmI4LTA3MTQtNDE5OC04YzM4LWRjOWI2MGFhYmI1NyJ9)
+
 
 
 ## 📷 Exemplos de visualizações
