@@ -133,7 +133,12 @@ The simulated data is available in the /data folder.
 ## 🔗 Dashboard Link
 
 ### 🔗 View the published dashboard here
+
+### 🔗 [Click here to access the Dashboard](https://app.powerbi.com/view?r=eyJrIjoiNjA5NDRhYmMtMmZmNC00MmI5LTk1MGYtMWNiZWNlMTQ5NjZjIiwidCI6IjY1OWNlMmI4LTA3MTQtNDE5OC04YzM4LWRjOWI2MGFhYmI1NyJ9)
+
 ### 📷 Visualization Samples
+![Dashboard - Visão Geral](https://github.com/user-attachments/assets/029dcdf7-fb70-4744-a408-f5692a86ccf5)
+![Dashboard - Inventário e SLA](https://github.com/user-attachments/assets/679a8d4f-8a06-425f-aafe-75c9e989f19c)
 
 ## 🔗 Related Projects
 Logistics Dashboard: Fleet and delivery performance analysis
