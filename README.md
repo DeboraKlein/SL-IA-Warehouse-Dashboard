@@ -50,7 +50,7 @@ Os dados estão organizados em quatro arquivos principais:
 ## 🧮 Fórmulas DAX utilizadas
 As medidas abaixo foram desenvolvidas para calcular indicadores logísticos com precisão e flexibilidade. Elas demonstram domínio de funções como CALCULATE, DIVIDE, AVERAGEX e uso de contexto com ALLEXCEPT.
 
-###📦 Acuracidade Média por Armazém
+### 📦 Acuracidade Média por Armazém
 ````
 Acuracidade Média por Armazém = 
 VAR TotalSistema = CALCULATE(
