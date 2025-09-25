@@ -47,7 +47,72 @@ Os dados estão organizados em quatro arquivos principais:
 - **OTIF (%)** = % de pedidos entregues dentro do SLA
 
 ---
+## 🧮 Fórmulas DAX utilizadas
+As medidas abaixo foram desenvolvidas para calcular indicadores logísticos com precisão e flexibilidade. Elas demonstram domínio de funções como CALCULATE, DIVIDE, AVERAGEX e uso de contexto com ALLEXCEPT.
 
+###📦 Acuracidade Média por Armazém
+````
+Acuracidade Média por Armazém = 
+VAR TotalSistema = CALCULATE(
+    SUM(FactInventory_Accuracy[Quantidade Sistema]), 
+    ALLEXCEPT(FactInventory_Accuracy, FactInventory_Accuracy[Armazem])
+)
+VAR TotalFisica = CALCULATE(
+    SUM(FactInventory_Accuracy[Quantidade Física]), 
+    ALLEXCEPT(FactInventory_Accuracy, FactInventory_Accuracy[Armazem])
+)
+RETURN DIVIDE(TotalFisica, TotalSistema, 0)
+Calcula a acuracidade por armazém, preservando o contexto de agrupamento.
+````
+### 💰 Custo por Item
+````
+Custo por Item = 
+DIVIDE(
+    SUM(FactOperational_Costs[Custo Total]), 
+    SUM(FactOperational_Costs[Itens Processados])
+)
+Mede o custo unitário por item processado.
+````
+### 📦 Volume Total Processado
+````
+Volume Total Processado = 
+SUM('FactOperations'[Itens Processados])
+Soma total dos itens movimentados.
+````
+### 📈 Produtividade Média
+```
+Produtividade Média = 
+AVERAGEX(
+    'FactOperations', 
+    'FactOperations'[Itens Processados] / FactOperations[Tempo Total (min)]
+)
+Avalia a produtividade média por operação com base no tempo.
+````
+### ❌ Taxa de Erro (%)
+````
+Taxa de Erro (%) = 
+DIVIDE(
+    SUM('FactOperations'[Erros]), 
+    SUM(FactOperations[Itens Processados])
+)
+Calcula a proporção de erros em relação ao volume processado.
+````
+### 📊 OTIF (%) por Mês
+````
+OTIF (%) por Mês = 
+VAR TotalPedidos = COUNTROWS(FactService_Level)
+VAR EntregasNoPrazo = CALCULATE(
+    COUNTROWS(FactService_Level),
+    FactService_Level[OTIF] = "Sim"
+)
+RETURN DIVIDE(EntregasNoPrazo, TotalPedidos)
+Mede o percentual de pedidos entregues dentro do prazo (On Time In Full).
+````
+### 🧮 Soma Total Sistema
+````
+Soma total sistema = 
+SUM(FactInventory_Accuracy[Quantidade Sistema])
+````
 ## 📈 Visualizações
 
 O dashboard inclui:
