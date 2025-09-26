@@ -120,6 +120,73 @@ Mede o percentual de pedidos entregues dentro do prazo (On Time In Full).
 Soma total sistema = 
 SUM(FactInventory_Accuracy[Quantidade Sistema])
 ````
+## Documentação de Duplicidades — FactOperations
+### 🔍 Objetivo
+Identificar e tratar duplicidades na tabela fato FactOperations, garantindo granularidade correta por operação, turno, data e armazém.
+
+### 🧩 Chaves duplicadas encontradas
+As seguintes chaves compostas apresentaram duplicidade (2 registros cada):
+
+Picking|Manhã|2025-06-09
+
+Picking|Noite|2025-07-11
+
+Recebimento|Tarde|2025-02-12
+
+Packing|Manhã|2025-04-29
+
+Picking|Noite|2025-01-03
+
+### 🧪 Investigação realizada
+Criação da coluna FactOperationsKey Composta por Operação|Turno|Data, posteriormente expandida para incluir Armazem.
+
+Verificação de duplicidade via DAX Medida criada para listar chaves com mais de uma ocorrência:
+
+````
+DuplicateKeysList = 
+VAR DuplicateKeys =
+    FILTER(
+        GROUPBY(
+            FactOperations,
+            FactOperations[FactOperationsKey],
+            "Cnt", COUNTX(CURRENTGROUP(), 1)
+        ),
+        [Cnt] > 1
+    )
+RETURN
+    CONCATENATEX(DuplicateKeys, FactOperations[FactOperationsKey] & " (" & [Cnt] & " vezes)", ", ")
+````
+Inspeção das linhas duplicadas Verificou-se que os registros representavam o mesmo evento, com valores numéricos que podiam ser somados.
+
+### 🛠️ Correção aplicada
+Agregação por FactOperationsKey no Power Query:
+
+Somados: Itens Processados, Tempo Total (min), Erros
+
+Preservados: Operação, Turno, Data, Armazem (primeira ocorrência não nula)
+
+Coluna auxiliar OriginalCount criada para auditoria
+
+Remoção de colunas temporárias e tabelas de teste Após validação, elementos usados apenas para diagnóstico foram excluídos do modelo.
+
+### ✅ Validação pós-correção
+Medidas comparativas:
+
+Rows Count = COUNTROWS(FactOperations)
+
+DistinctKey Count = DISTINCTCOUNT(FactOperations[FactOperationsKey])
+
+Acuracidade de Inventário ajustada de 96,85% → 96,80%
+
+Cartão múltiplo com todas as medidas foi usado para comparar valores antes e depois da correção.
+
+### 📌 Observações finais
+A diferença de 0,05 p.p. na acuracidade foi considerada aceitável.
+
+A modelagem agora garante 1 linha por evento operacional, respeitando o grain definido.
+
+A lógica de agregação foi documentada e validada com medidas e visuais.
+
 ## 📈 Visualizações
 
 O dashboard inclui:
