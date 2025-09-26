@@ -41,7 +41,7 @@ FactOperations (ou FactExceptions) — Grain: uma linha por Operação por Turno
 
 TableExpectedCost (FactOperational_Costs) — Grain: uma linha por Armazém por Mês/Data (colunas chave: Armazém, Month ou Data agregada por mês), contendo Custo Valor €, Custo Total € e Itens Processados.
 
-FactInventory_Accuracy — Grain: uma linha por Armazém por SKU por Data (colunas chave: Armazem, SKU, Data), contendo Quantidade Sistema, Quantidade Física e Acurracidade (%).
+FactInventory_Accuracy — Grain: uma linha por Armazém por SKU por Data (colunas chave: Armazem, SKU, Data), contendo Quantidade Sistema, Quantidade Física e Acuracidade (%).
 
 
 ## 📊 Indicadores calculados
