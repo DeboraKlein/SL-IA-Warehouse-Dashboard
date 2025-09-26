@@ -112,6 +112,72 @@ Total System Quantity =
 SUM(FactInventory_Accuracy[System Quantity])
 
 ````
+Duplicate Records Documentation — FactOperations
+🔍 Objective
+Identify and resolve duplicate records in the fact table FactOperations, ensuring correct granularity by operation, shift, date, and warehouse.
+
+🧩 Duplicate keys found
+The following composite keys had duplicate entries (2 records each):
+
+Picking|Morning|2025-06-09
+
+Picking|Night|2025-07-11
+
+Receiving|Afternoon|2025-02-12
+
+Packing|Morning|2025-04-29
+
+Picking|Night|2025-01-03
+
+🧪 Investigation steps
+Created column FactOperationsKey Composed of Operation|Shift|Date, later expanded to include Warehouse.
+
+Duplicate detection via DAX Measure created to list keys with more than one occurrence:
+````
+DuplicateKeysList = 
+VAR DuplicateKeys =
+    FILTER(
+        GROUPBY(
+            FactOperations,
+            FactOperations[FactOperationsKey],
+            "Cnt", COUNTX(CURRENTGROUP(), 1)
+        ),
+        [Cnt] > 1
+    )
+RETURN
+    CONCATENATEX(DuplicateKeys, FactOperations[FactOperationsKey] & " (" & [Cnt] & " times)", ", ")
+````
+Record inspection Confirmed that duplicates represented the same event and could be safely aggregated.
+
+🛠️ Correction applied
+Aggregation by FactOperationsKey in Power Query:
+
+Aggregated: Processed Items, Total Time (min), Errors
+
+Preserved: Operation, Shift, Date, Warehouse (first non-null occurrence)
+
+Added OriginalCount column for audit purposes
+
+Removed temporary columns and test tables Diagnostic elements were removed after validation.
+
+✅ Post-correction validation
+Comparison measures:
+
+Rows Count = COUNTROWS(FactOperations)
+
+DistinctKey Count = DISTINCTCOUNT(FactOperations[FactOperationsKey])
+
+Inventory Accuracy adjusted from 96.85% → 96.80%
+
+A multi-card visual was used to compare all key metrics before and after correction.
+
+📌 Final notes
+The 0.05 p.p. change in accuracy was deemed acceptable.
+
+The model now ensures one row per operational event, respecting the defined grain.
+
+Aggregation logic was documented and validated through measures and visuals
+
 ## 📈 Visualizations
 The dashboard includes:
 
