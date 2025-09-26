@@ -112,11 +112,11 @@ Total System Quantity =
 SUM(FactInventory_Accuracy[System Quantity])
 
 ````
-Duplicate Records Documentation — FactOperations
-🔍 Objective
+## Duplicate Records Documentation — FactOperations
+### 🔍 Objective
 Identify and resolve duplicate records in the fact table FactOperations, ensuring correct granularity by operation, shift, date, and warehouse.
 
-🧩 Duplicate keys found
+### 🧩 Duplicate keys found
 The following composite keys had duplicate entries (2 records each):
 
 Picking|Morning|2025-06-09
@@ -129,7 +129,7 @@ Packing|Morning|2025-04-29
 
 Picking|Night|2025-01-03
 
-🧪 Investigation steps
+### 🧪 Investigation steps
 Created column FactOperationsKey Composed of Operation|Shift|Date, later expanded to include Warehouse.
 
 Duplicate detection via DAX Measure created to list keys with more than one occurrence:
@@ -149,7 +149,7 @@ RETURN
 ````
 Record inspection Confirmed that duplicates represented the same event and could be safely aggregated.
 
-🛠️ Correction applied
+### 🛠️ Correction applied
 Aggregation by FactOperationsKey in Power Query:
 
 Aggregated: Processed Items, Total Time (min), Errors
@@ -160,7 +160,7 @@ Added OriginalCount column for audit purposes
 
 Removed temporary columns and test tables Diagnostic elements were removed after validation.
 
-✅ Post-correction validation
+### ✅ Post-correction validation
 Comparison measures:
 
 Rows Count = COUNTROWS(FactOperations)
@@ -171,7 +171,7 @@ Inventory Accuracy adjusted from 96.85% → 96.80%
 
 A multi-card visual was used to compare all key metrics before and after correction.
 
-📌 Final notes
+### 📌 Final notes
 The 0.05 p.p. change in accuracy was deemed acceptable.
 
 The model now ensures one row per operational event, respecting the defined grain.
