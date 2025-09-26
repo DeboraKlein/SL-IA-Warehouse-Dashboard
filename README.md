@@ -30,6 +30,14 @@ inventory_accuracy.csv	Comparison between physical and system stock, with accura
 operational_costs.csv	Fixed and variable costs by warehouse and month
 service_level.csv	Real-time vs. SLA per order, with OTIF indicator
 
+FactServiceLevel — Grain: one row per order per date (identified by Pedido/SKU code), contains SLA (min), Actual Time (min) and OTIF flag.
+
+FactOperations — Grain: one row per operation occurrence per shift per date (operation × shift × date), contains processed time and error counts.
+
+FactOperational_Costs — Grain: one row per warehouse per month (warehouse × month), aggregates cost and processed items.
+
+FactInventory_Accuracy — Grain: one row per warehouse per SKU per inventory count date (warehouse × SKU × inventory_count_date), contains system vs physical counts and accuracy.
+
 ### 📊 Calculated Indicators
 Average Productivity = Items Processed ÷ Total Time
 
