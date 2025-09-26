@@ -35,6 +35,13 @@ Os dados estão organizados em quatro arquivos principais:
 | `operational_costs.csv` | Custos fixos e variáveis por armazém e mês |
 | `service_level.csv` | Tempo real vs. SLA por pedido, com indicador OTIF |
 
+FactServiceLevel — Grain: uma linha por Pedido por Data (colunas chave: Pedido, Data), contendo SLA (min), Tempo Real (min) e OTIF.
+
+FactOperations (ou FactExceptions) — Grain: uma linha por Operação por Turno por Data (colunas chave: Operação, Turno, Data), contendo Tempo Processado (min) e Erros.
+
+TableExpectedCost (FactOperational_Costs) — Grain: uma linha por Armazém por Mês/Data (colunas chave: Armazém, Month ou Data agregada por mês), contendo Custo Valor €, Custo Total € e Itens Processados.
+
+FactInventory_Accuracy — Grain: uma linha por Armazém por SKU por Data (colunas chave: Armazem, SKU, Data), contendo Quantidade Sistema, Quantidade Física e Acurracidade (%).
 ---
 
 ## 📊 Indicadores calculados
