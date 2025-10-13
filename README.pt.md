@@ -1,10 +1,10 @@
-# 📦 Warehouse KPI Dashboard
+#  Warehouse KPI Dashboard
 
 Este projeto apresenta um dashboard interativo desenvolvido no Power BI para monitoramento de indicadores logísticos em operações de armazéns. A solução foi construída com base em dados simulados e tem como objetivo demonstrar a capacidade de consolidar, modelar e visualizar informações críticas para a tomada de decisão operacional.
 
 ---
 
-## 🎯 Objetivo
+##  Objetivo
 
 Fornecer uma visão clara e confiável do desempenho dos armazéns, com foco em:
 
@@ -15,7 +15,7 @@ Fornecer uma visão clara e confiável do desempenho dos armazéns, com foco em:
 
 ---
 
-## 🧠 Tecnologias utilizadas
+##  Tecnologias utilizadas
 
 - **Power BI**: Modelagem de dados, DAX, Power Query e visualizações interativas
 - **Excel / CSV**: Simulação e estruturação dos dados operacionais
@@ -24,7 +24,7 @@ Fornecer uma visão clara e confiável do desempenho dos armazéns, com foco em:
 
 ---
 
-## 📁 Estrutura dos dados
+##  Estrutura dos dados
 
 Os dados estão organizados em quatro arquivos principais:
 
@@ -44,7 +44,7 @@ TableExpectedCost (FactOperational_Costs) — Grain: uma linha por Armazém por 
 FactInventory_Accuracy — Grain: uma linha por Armazém por SKU por Data (colunas chave: Armazem, SKU, Data), contendo Quantidade Sistema, Quantidade Física e Acuracidade (%).
 
 
-## 📊 Indicadores calculados
+##  Indicadores calculados
 
 - **Produtividade Média** = Itens Processados ÷ Tempo Total  
 - **Taxa de erro (%)** = (Erros ÷ Itens Processados) × 100
@@ -54,10 +54,10 @@ FactInventory_Accuracy — Grain: uma linha por Armazém por SKU por Data (colun
 - **OTIF (%)** = % de pedidos entregues dentro do SLA
 
 
-## 🧮 Fórmulas DAX utilizadas
+##  Fórmulas DAX utilizadas
 As medidas abaixo foram desenvolvidas para calcular indicadores logísticos com precisão e flexibilidade. Elas demonstram domínio de funções como CALCULATE, DIVIDE, AVERAGEX e uso de contexto com ALLEXCEPT.
 
-### 📦 Acuracidade Média por Armazém
+###  Acuracidade Média por Armazém
 ````
 Acuracidade Média por Armazém = 
 VAR TotalSistema = CALCULATE(
@@ -71,7 +71,7 @@ VAR TotalFisica = CALCULATE(
 RETURN DIVIDE(TotalFisica, TotalSistema, 0)
 Calcula a acuracidade por armazém, preservando o contexto de agrupamento.
 ````
-### 💰 Custo por Item
+###  Custo por Item
 ````
 Custo por Item = 
 DIVIDE(
@@ -80,13 +80,13 @@ DIVIDE(
 )
 Mede o custo unitário por item processado.
 ````
-### 📦 Volume Total Processado
+###  Volume Total Processado
 ````
 Volume Total Processado = 
 SUM('FactOperations'[Itens Processados])
 Soma total dos itens movimentados.
 ````
-### 📈 Produtividade Média
+###  Produtividade Média
 ```
 Produtividade Média = 
 AVERAGEX(
@@ -95,7 +95,7 @@ AVERAGEX(
 )
 Avalia a produtividade média por operação com base no tempo.
 ````
-### ❌ Taxa de Erro (%)
+###  Taxa de Erro (%)
 ````
 Taxa de Erro (%) = 
 DIVIDE(
@@ -104,7 +104,7 @@ DIVIDE(
 )
 Calcula a proporção de erros em relação ao volume processado.
 ````
-### 📊 OTIF (%) por Mês
+###  OTIF (%) por Mês
 ````
 OTIF (%) por Mês = 
 VAR TotalPedidos = COUNTROWS(FactService_Level)
@@ -115,16 +115,16 @@ VAR EntregasNoPrazo = CALCULATE(
 RETURN DIVIDE(EntregasNoPrazo, TotalPedidos)
 Mede o percentual de pedidos entregues dentro do prazo (On Time In Full).
 ````
-### 🧮 Soma Total Sistema
+###  Soma Total Sistema
 ````
 Soma total sistema = 
 SUM(FactInventory_Accuracy[Quantidade Sistema])
 ````
 ## Documentação de Duplicidades — FactOperations
-### 🔍 Objetivo
+###  Objetivo
 Identificar e tratar duplicidades na tabela fato FactOperations, garantindo granularidade correta por operação, turno, data e armazém.
 
-### 🧩 Chaves duplicadas encontradas
+###  Chaves duplicadas encontradas
 As seguintes chaves compostas apresentaram duplicidade (2 registros cada):
 
 Picking|Manhã|2025-06-09
@@ -137,7 +137,7 @@ Packing|Manhã|2025-04-29
 
 Picking|Noite|2025-01-03
 
-### 🧪 Investigação realizada
+###  Investigação realizada
 Criação da coluna FactOperationsKey Composta por Operação|Turno|Data, posteriormente expandida para incluir Armazem.
 
 Verificação de duplicidade via DAX Medida criada para listar chaves com mais de uma ocorrência:
@@ -158,7 +158,7 @@ RETURN
 ````
 Inspeção das linhas duplicadas Verificou-se que os registros representavam o mesmo evento, com valores numéricos que podiam ser somados.
 
-### 🛠️ Correção aplicada
+###  Correção aplicada
 Agregação por FactOperationsKey no Power Query:
 
 Somados: Itens Processados, Tempo Total (min), Erros
@@ -169,7 +169,7 @@ Coluna auxiliar OriginalCount criada para auditoria
 
 Remoção de colunas temporárias e tabelas de teste Após validação, elementos usados apenas para diagnóstico foram excluídos do modelo.
 
-### ✅ Validação pós-correção
+###  Validação pós-correção
 Medidas comparativas:
 
 Rows Count = COUNTROWS(FactOperations)
@@ -180,14 +180,14 @@ Acuracidade de Inventário ajustada de 96,85% → 96,80%
 
 Cartão múltiplo com todas as medidas foi usado para comparar valores antes e depois da correção.
 
-### 📌 Observações finais
+###  Observações finais
 A diferença de 0,05 p.p. na acuracidade foi considerada aceitável.
 
 A modelagem agora garante 1 linha por evento operacional, respeitando o grain definido.
 
 A lógica de agregação foi documentada e validada com medidas e visuais.
 
-## 📈 Visualizações
+##  Visualizações
 
 O dashboard inclui:
 
@@ -197,7 +197,7 @@ O dashboard inclui:
   
 ---
 
-## 🧩 Próximos passos
+##  Próximos passos
 
 - Integração com dados reais via SQL Server ou API  
 - Automação de atualizações com Power Automate  
@@ -205,7 +205,7 @@ O dashboard inclui:
 - Expansão para indicadores de transporte e armazenagem avançada
 
 ---
-## 🚀 Como usar
+##  Como usar
 
 ### 1. Clone este repositório:
    ```bash
@@ -220,29 +220,29 @@ Os dados utilizados são simulados e estão disponíveis na pasta /data
 
 ---
 
-## 🔗 Link do Dashboard  
-### 🔗 [Acesse o dashboard publicado aqui](https://app.powerbi.com/view?r=eyJrIjoiNjA5NDRhYmMtMmZmNC00MmI5LTk1MGYtMWNiZWNlMTQ5NjZjIiwidCI6IjY1OWNlMmI4LTA3MTQtNDE5OC04YzM4LWRjOWI2MGFhYmI1NyJ9)
+##  Link do Dashboard  
+###  [Acesse o dashboard publicado aqui](https://app.powerbi.com/view?r=eyJrIjoiNjA5NDRhYmMtMmZmNC00MmI5LTk1MGYtMWNiZWNlMTQ5NjZjIiwidCI6IjY1OWNlMmI4LTA3MTQtNDE5OC04YzM4LWRjOWI2MGFhYmI1NyJ9)
 
 
 
 
 
-## 📷 Exemplos de visualizações
+##  Exemplos de visualizações
 
 ![Dashboard - Visão Geral](https://github.com/user-attachments/assets/029dcdf7-fb70-4744-a408-f5692a86ccf5)
 ![Dashboard - Inventário e SLA](https://github.com/user-attachments/assets/679a8d4f-8a06-425f-aafe-75c9e989f19c)
 
-## 🔗 Projetos relacionados
+##  Projetos relacionados
 
 - [Logistics Dashboard](https://github.com/DeboraKlein/Logistics-Dashboard): Análise de desempenho de frota e entregas
 
 
 
-## 👩‍💻 Sobre mim
+##  Sobre mim
 
 Este projeto foi desenvolvido por **Debora Klein**, Analista de Dados com experiência em BI, planejamento financeiro e inteligência operacional.  
-🔗 [linkedin.com/in/débora-klein](https://linkedin.com/in/débora-klein)  
-💻 [github.com/DeboraKlein](https://github.com/DeboraKlein)
+ [linkedin.com/in/débora-klein](https://linkedin.com/in/débora-klein)  
+ [github.com/DeboraKlein](https://github.com/DeboraKlein)
 
 ---
 
