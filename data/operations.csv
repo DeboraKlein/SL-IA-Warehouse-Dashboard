@@ -1,0 +1,11 @@
+Data,Armaz‚m,Turno,Opera‡Æo,Itens Processados,Tempo Total (min),Erros
+2025-09-01,SP01,ManhÆ,Recebimento,1200,180,3
+2025-09-01,SP01,Tarde,Expedi‡Æo,950,160,1
+2025-09-01,RJ02,Noite,Invent rio,600,120,0
+2025-09-02,SP01,ManhÆ,Separa‡Æo,1100,170,2
+2025-09-02,RJ02,Tarde,Expedi‡Æo,980,150,1
+2025-09-02,MG03,ManhÆ,Recebimento,1300,200,4
+2025-09-03,SP01,Noite,Invent rio,620,115,0
+2025-09-03,MG03,Tarde,Separa‡Æo,1050,165,2
+2025-09-03,RJ02,ManhÆ,Recebimento,1250,190,3
+
